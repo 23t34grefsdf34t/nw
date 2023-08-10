@@ -526,8 +526,8 @@ local Tabs = {
 local MainTab = Tabs.Main
 local CharacterLeftGroupBox = MainTab:AddLeftGroupbox('Character Options')
 
-CharacterLeftGroupBox:AddButton('Respawn', function()
-    CharacterMethods:Respawn()
+CharacterLeftGroupBox:AddButton('Kick urself to save loots', function()
+    game:GetService("Players").LocalPlayer:Kick("You're a retard.")
 end)
 
 CharacterLeftGroupBox:AddToggle('AntiLoot', {
@@ -558,7 +558,7 @@ CharacterLeftGroupBox:AddSlider('SpeedBoost', {
     Text = 'Speed Boost',
     Default = 0,
     Min = 0,
-    Max = 15,
+    Max = 13.5,
     Rounding = 2,
     Callback = function(Value)
         CharacterMethods.Speed.SpeedBoost = Value
@@ -612,16 +612,6 @@ end)
 GameTeleportsRightGroupBox:AddButton('Beauval', function()
     TeleportService:Teleport(5620237900)
 end)
-
-local ToolLeftGroupBox = MainTab:AddLeftGroupbox('Tool Modifications')
-
-ToolLeftGroupBox:AddToggle('PickaxeMultiplier', {
-    Text = 'Pickaxe Multiplier',
-    Default = false,
-    Callback = function(Value)
-        print('[cb] PickaxeMultiplier changed to:', Value)
-    end
-})
 
 local GameTeleportsRightGroupBox = MainTab:AddRightGroupbox('Location Teleports')
 
@@ -971,15 +961,6 @@ VisualsLeftGroupBox:AddToggle('Names', {
     end
 })
 
--- VisualsLeftGroupBox:AddToggle('Distance', {
---     Text = 'Show Distance',
---     Default = false,
---     Callback = function(Value)
---         ESP.
---         print('[cb] Distance changed to:', Value)
---     end
--- })
-
 VisualsLeftGroupBox:AddToggle('Players', {
     Text = 'Players',
     Default = false,
@@ -1024,7 +1005,7 @@ VisualsLeftGroupBox:AddSlider('OreMaxDistance', {
 
 VisualsLeftGroupBox:AddButton('Treasure esp', function()
     for i,v in pairs(game:GetService("Workspace").TargetFilter:GetDescendants()) do
-    if v.Parent.Name == "TreasureHuntMarkers" or v.Parent.Name == "TreasureHuntLocations" then
+    if v.Parent.Name == "TreasureHuntMarkers" then
         local cham = Instance.new("BoxHandleAdornment", v)
         cham.ZIndex = 10
         cham.Adornee = v
@@ -1050,14 +1031,14 @@ VisualsLeftGroupBox:AddButton('Treasure esp', function()
 end
 
 for i,v in pairs(game:GetService("Workspace").Carriables:GetChildren()) do
-    if vName == "Treasure hunt board_TreasureHunt2" or v.Name == "Treasure hunt board_TreasureHunt1" then
+    if vName == "Treasure hunt board_TreasureHunt2" or v.Name == "Treasure hunt board_TreasureHunt1" or v.Name == "Treasure hunt board_TreasureHunt3" then
         local cham = Instance.new("BoxHandleAdornment", v)
         cham.ZIndex = 10
         cham.Adornee = v
         cham.AlwaysOnTop = true
-        cham.Size = v.Size
+        cham.Size = Vector3.new(1,1,1)
         cham.Transparency = 0.75
-        cham.Color3 = v.Color
+        cham.Color3 = Vector3.new(0,0,0)
         cham.Name = "Cham"
         
         local bill = Instance.new("BillboardGui", v)
@@ -1076,7 +1057,7 @@ for i,v in pairs(game:GetService("Workspace").Carriables:GetChildren()) do
 end
 
 game:GetService("Workspace").Carriables.ChildAdded:Connect(function(v)
-    if v.Name == "Treasure hunt board_TreasureHunt2" or v.Name == "Treasure hunt board_TreasureHunt1" then
+    if v.Name == "Treasure hunt board_TreasureHunt2" or v.Name == "Treasure hunt board_TreasureHunt1" or v.Name == "Treasure hunt board_TreasureHunt3" then
         local cham = Instance.new("BoxHandleAdornment", v)
         cham.ZIndex = 10
         cham.Adornee = v
