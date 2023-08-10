@@ -558,7 +558,7 @@ CharacterLeftGroupBox:AddSlider('SpeedBoost', {
     Text = 'Speed Boost',
     Default = 0,
     Min = 0,
-    Max = 25,
+    Max = 15,
     Rounding = 2,
     Callback = function(Value)
         CharacterMethods.Speed.SpeedBoost = Value
@@ -578,14 +578,26 @@ CharacterLeftGroupBox:AddSlider('SpeedBoost', {
     end
 })
 
-CharacterLeftGroupBox:AddButton('Rollback Data [Soon™]', function()
-    if not Start then
-        local Sound = Instance.new("Sound", workspace)
-        Sound.SoundId = "rbxassetid://4623124292"
-        Sound.Loaded:Wait()
-        Sound:Play()
+CharacterLeftGroupBox:AddToggle('Swim boost', {
+    Text = 'Swim boost',
+    Default = false,
+    Tooltip = 'This is a tooltip',
+        
+        Callback = function(Value)
+        print('[cb] MyToggle changed to:', Value)
+        if Value then
+        CharacterMethods.Speed.SpeedBoost = 22
+         CharacterMethods.Speed.Enabled = Value
+        CharacterMethods.Speed.SpeedConnection = RunService.Heartbeat:Connect(CharacterMethods.Speed.Heartbeat)
+else
+        CharacterMethods.Speed.Enabled = false
+        CharacterMethods.Speed.SpeedConnection:Disconnect()
+        CharacterMethods.Speed.SpeedConnection = nil
+        end
     end
-end)
+})
+
+CharacterMethods.Speed.Enabled = false
 
 local GameTeleportsRightGroupBox = MainTab:AddRightGroupbox('Island Teleports')
 
@@ -900,14 +912,6 @@ CombatLeftGroupBox:AddSlider('AnimalHitboxExtender', {
     end
 })
 
-CombatLeftGroupBox:AddToggle('Killaura', {
-    Text = 'Killaura  [Unimplemented]',
-    Default = false,
-    Callback = function(Value)
-        print('[cb] Killaura changed to:', Value)
-    end
-})
-
 -- Tab 3 - Visuals
 local VisualsTab = Tabs.Visuals
 local VisualsLeftGroupBox = VisualsTab:AddLeftGroupbox('ESP Settings')
@@ -997,13 +1001,6 @@ VisualsLeftGroupBox:AddSlider('PlayerMaxDistance', {
     end
 })
 
-VisualsLeftGroupBox:AddToggle('Mobs', {
-    Text = 'Mobs [Unimplemented]',
-    Default = false,
-    Callback = function(Value)
-        print('[cb] Mobs changed to:', Value)
-    end
-})
 
 VisualsLeftGroupBox:AddToggle('Ores', {
     Text = 'Ores',
@@ -1024,6 +1021,95 @@ VisualsLeftGroupBox:AddSlider('OreMaxDistance', {
         print('[cb] Max Distance changed to:', Value)
     end
 })
+
+VisualsLeftGroupBox:AddButton('Treasure esp', function()
+    for i,v in pairs(game:GetService("Workspace").TargetFilter:GetDescendants()) do
+    if v.Parent.Name == "TreasureHuntMarkers" or v.Parent.Name == "TreasureHuntLocations" then
+        local cham = Instance.new("BoxHandleAdornment", v)
+        cham.ZIndex = 10
+        cham.Adornee = v
+        cham.AlwaysOnTop = true
+        cham.Size = v.Size
+        cham.Transparency = 0.75
+        cham.Color3 = v.Color
+        cham.Name = "Cham"
+        
+        local bill = Instance.new("BillboardGui", v)
+        bill.Name = "NameEsp"
+        bill.Size = UDim2.new(30,30,30,30)
+        bill.Adornee = v
+        bill.AlwaysOnTop = true
+        local name = Instance.new("TextLabel", bill)
+        name.TextWrapped = true
+        name.Text = v.Name
+        name.Size = UDim2.new(1,0,1,0)
+        name.TextYAlignment = "Top"
+        name.TextColor3 = Color3.new(1,1,1)
+        name.BackgroundTransparency = 1
+    end
+end
+
+for i,v in pairs(game:GetService("Workspace").Carriables:GetChildren()) do
+    if vName == "Treasure hunt board_TreasureHunt2" or v.Name == "Treasure hunt board_TreasureHunt1" then
+        local cham = Instance.new("BoxHandleAdornment", v)
+        cham.ZIndex = 10
+        cham.Adornee = v
+        cham.AlwaysOnTop = true
+        cham.Size = v.Size
+        cham.Transparency = 0.75
+        cham.Color3 = v.Color
+        cham.Name = "Cham"
+        
+        local bill = Instance.new("BillboardGui", v)
+        bill.Name = "NameEsp"
+        bill.Size = UDim2.new(30,30,30,30)
+        bill.Adornee = v
+        bill.AlwaysOnTop = true
+        local name = Instance.new("TextLabel", bill)
+        name.TextWrapped = true
+        name.Text = v.Name
+        name.Size = UDim2.new(1,0,1,0)
+        name.TextYAlignment = "Top"
+        name.TextColor3 = Color3.new(1,1,1)
+        name.BackgroundTransparency = 1
+    end
+end
+
+game:GetService("Workspace").Carriables.ChildAdded:Connect(function(v)
+    if v.Name == "Treasure hunt board_TreasureHunt2" or v.Name == "Treasure hunt board_TreasureHunt1" then
+        local cham = Instance.new("BoxHandleAdornment", v)
+        cham.ZIndex = 10
+        cham.Adornee = v
+        cham.AlwaysOnTop = true
+        cham.Size = Vector3.new(1,1,1)
+        cham.Transparency = 0.75
+        cham.Color3 = Color3.new(0,0,0)
+        cham.Name = "Cham"
+        
+        local bill = Instance.new("BillboardGui", v)
+        bill.Name = "NameEsp"
+        bill.Size = UDim2.new(30,30,30,30)
+        bill.Adornee = v
+        bill.AlwaysOnTop = true
+        local name = Instance.new("TextLabel", bill)
+        name.TextWrapped = true
+        name.Text = v.Name
+        name.Size = UDim2.new(1,0,1,0)
+        name.TextYAlignment = "Top"
+        name.TextColor3 = Color3.new(1,1,1)
+        name.BackgroundTransparency = 1
+    end
+end)
+end)
+
+VisualsLeftGroupBox:AddButton('Destroy esp', function()
+for i,b in pairs(game:GetDescendants()) do
+    if b.ClassName == "BoxHandleAdornment" or b.Name == "NameEsp" then
+        b:Destroy()
+    end
+end
+end)
+
 
 -- Tab 4 - Credits
 local CreditsTab = Tabs.Credits
@@ -1050,7 +1136,6 @@ SaveManager:SetLibrary(Library)
 SaveManager:BuildConfigSection(Tabs["UI Settings"])
 
 SaveManager:IgnoreThemeSettings()
-SaveManager:SetIgnoreIndexes({ 'MenuKeybind' })
 
 ThemeManager:SetFolder('sasware')
 SaveManager:SetFolder('sasware/Northwind')
