@@ -61,7 +61,12 @@ local TeleportLocations = {
         ["Fort de Belcourt"] = CFrame.new(1799, 85, -1086),
         ["Rockledge"] = CFrame.new(-666, 30, 1579)
     },
-    [5620237741] = {}
+    [5620237741] = {},
+    [6249721735] = {},
+    [5620227713] = {
+        ["wolf spawn"] = CFrame.new(54, 471, -1391),
+        ["iron"] = CFrame.new(-1126, 411, -456)
+    }
 }
 
 local GameFunctions = {}
@@ -611,6 +616,14 @@ end)
 
 GameTeleportsRightGroupBox:AddButton('Beauval', function()
     TeleportService:Teleport(5620237900)
+end)
+
+GameTeleportsRightGroupBox:AddButton('Stonemore', function()
+    TeleportService:Teleport(6249721735)
+end)
+
+GameTeleportsRightGroupBox:AddButton('Ellesmere', function()
+    TeleportService:Teleport(5620227713)
 end)
 
 local GameTeleportsRightGroupBox = MainTab:AddRightGroupbox('Location Teleports')
