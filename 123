@@ -836,6 +836,60 @@ CombatLeftGroupBox:AddButton({
 
 CombatLeftGroupBox:AddLabel('(Must have ram rod equipped)')
 
+CombatLeftGroupBox:AddButton({
+    Text = 'Gun Mod',
+    Func = function()
+    for i , v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"ProjectileWeight") then
+       v.ProjectileWeight = math.huge;
+       v.ProjectileWeight = 0;
+    end;
+end;
+
+for i , v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"ProjectileMaxDistance") then
+       v.ProjectileMaxDistance = math.huge;
+       v.ProjectileMaxDistance = 10000;
+    end;
+end;
+
+for i , v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"Spread") then
+       v.Spread = math.huge;
+       v.Spread = -1;
+    end;
+end;
+end,
+    DoubleClick = false
+})
+
+CombatLeftGroupBox:AddButton({
+    Text = 'Bow Mod',
+    Func = function()
+    for i , v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"ProjectileWeight") then
+       v.ProjectileWeight = math.huge;
+       v.ProjectileWeight = 0;
+    end;
+end;
+
+for i , v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"ProjectileMaxDistance") then
+       v.ProjectileMaxDistance = math.huge;
+       v.ProjectileMaxDistance = 10000;
+    end;
+end;
+
+for i , v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"Spread") then
+       v.Spread = math.huge;
+       v.Spread = -5;
+    end;
+end;
+end,
+    DoubleClick = false
+})
+
 CombatLeftGroupBox:AddToggle('SilentAim', {
     Text = 'Silent Aim [In-Development]',
     Default = false,
