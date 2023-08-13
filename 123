@@ -561,26 +561,30 @@ CharacterLeftGroupBox:AddToggle('InfiniteStamina', {
     end
 })
 
-CharacterLeftGroupBox:AddSlider('SpeedBoost', {
-    Text = 'Speed Boost',
-    Default = 0,
-    Min = 0,
-    Max = 13.5,
-    Rounding = 2,
+CharacterLeftGroupBox:AddToggle('Join Notify', {
+    Text = 'Join Notify',
+    Default = false,
     Callback = function(Value)
-        CharacterMethods.Speed.SpeedBoost = Value
+        print('[cb] FullBright changed to:', Value)
+        if Value then
+            wait(0.1)
+local function notif(plr) 
+   local message = ""
+   if plr:IsInGroup(32704720)  then
+       message = "admin has joined"
+   else
+       message = plr.Name .. " has joined"
+   end
+   game:GetService('StarterGui'):SetCore('SendNotification', {
+       Title = 'New player connected',
+       Text = message,
+       Duration = 3
+   })
+end
 
-        if Value > 0 then
-            if not CharacterMethods.Speed.Enabled then
-                CharacterMethods.Speed.Enabled = true
-                CharacterMethods.Speed.SpeedConnection = RunService.Heartbeat:Connect(CharacterMethods.Speed.Heartbeat)
-            end
+game:GetService("Players").PlayerAdded:Connect(notif)
         else
-            if CharacterMethods.Speed.Enabled then
-                CharacterMethods.Speed.Enabled = false
-                CharacterMethods.Speed.SpeedConnection:Disconnect()
-                CharacterMethods.Speed.SpeedConnection = nil
-            end
+print("nil")
         end
     end
 })
@@ -605,6 +609,30 @@ else
 })
 
 CharacterMethods.Speed.Enabled = false
+
+CharacterLeftGroupBox:AddSlider('SpeedBoost', {
+    Text = 'Speed Boost',
+    Default = 0,
+    Min = 0,
+    Max = 13.5,
+    Rounding = 2,
+    Callback = function(Value)
+        CharacterMethods.Speed.SpeedBoost = Value
+
+        if Value > 0 then
+            if not CharacterMethods.Speed.Enabled then
+                CharacterMethods.Speed.Enabled = true
+                CharacterMethods.Speed.SpeedConnection = RunService.Heartbeat:Connect(CharacterMethods.Speed.Heartbeat)
+            end
+        else
+            if CharacterMethods.Speed.Enabled then
+                CharacterMethods.Speed.Enabled = false
+                CharacterMethods.Speed.SpeedConnection:Disconnect()
+                CharacterMethods.Speed.SpeedConnection = nil
+            end
+        end
+    end
+})
 
 local GameTeleportsRightGroupBox = MainTab:AddRightGroupbox('Island Teleports')
 
