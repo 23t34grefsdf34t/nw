@@ -1099,7 +1099,7 @@ VisualsLeftGroupBox:AddButton('Treasure esp', function()
 end
 
 for i,v in pairs(game:GetService("Workspace").Carriables:GetChildren()) do
-    if vName == "Treasure hunt board_TreasureHunt2" or v.Name == "Treasure hunt board_TreasureHunt1" or v.Name == "Treasure hunt board_TreasureHunt3" then
+    if v.Name == "Treasure hunt board_TreasureHunt2" or v.Name == "Treasure hunt board_TreasureHunt1" or v.Name == "Treasure hunt board_TreasureHunt3" then
         local cham = Instance.new("BoxHandleAdornment", v)
         cham.ZIndex = 10
         cham.Adornee = v
