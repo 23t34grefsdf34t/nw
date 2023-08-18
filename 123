@@ -53,7 +53,8 @@ local TeleportLocations = {
         ["Fishing Cabin"] = CFrame.new(1845, 45, 3122),
         ["Fur Trader"] = CFrame.new(660, 34, 1324),
         ["Native Camp"] = CFrame.new(466, 88, 591),
-        ["Forrester's Grove"] = CFrame.new(1779, 74, 1080)
+        ["Forrester's Grove"] = CFrame.new(1779, 74, 1080),
+        ["fort flag"] = CFrame.new(3345, 80, 1644)
     },
     [5620237900] = {
         ["Abandoned Garden"] = CFrame.new(2036, 61, 1265),
