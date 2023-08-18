@@ -62,7 +62,9 @@ local TeleportLocations = {
         ["Rockledge"] = CFrame.new(-666, 30, 1579)
     },
     [5620237741] = {},
-    [6249721735] = {},
+    [6249721735] = {
+        ["fort flag"] = CFrame.new(-1477, 105, -1521)
+    },
     [4540286603] = {},
     [5620227713] = {
         ["wolf spawn"] = CFrame.new(54, 471, -1391),
