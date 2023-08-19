@@ -1210,7 +1210,8 @@ CreditsLeftGroupBox:AddToggle('No Blur', {
         
         Callback = function(Value)
         print('[cb] MyToggle changed to:', Value)
-if Value then game:GetService("Lighting").UnderwaterBlurEffect:Destroy()
+if Value then
+game:GetService("Lighting").UnderwaterBlurEffect:Destroy()
 else
 print("1")
         end
