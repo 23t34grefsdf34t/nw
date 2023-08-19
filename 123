@@ -1138,7 +1138,7 @@ for i,v in pairs(game:GetService("Workspace").Carriables:GetChildren()) do
         cham.AlwaysOnTop = true
         cham.Size = Vector3.new(1,1,1)
         cham.Transparency = 0.75
-        cham.Color3 = Vector3.new(0,0,0)
+        cham.Color3 = Color3.new(0,0,0)
         cham.Name = "Cham"
         
         local bill = Instance.new("BillboardGui", v)
