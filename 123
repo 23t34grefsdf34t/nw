@@ -573,7 +573,7 @@ CharacterLeftGroupBox:AddToggle('Join Notify', {
             wait(0.1)
 local function notif(plr) 
    local message = ""
-   if plr:IsInGroup(5375519)  then
+   if plr:IsInGroup(32704720)  then
        message = "admin has joined"
    else
        message = plr.Name .. " has joined"
@@ -588,7 +588,7 @@ end
 game:GetService("Players").PlayerAdded:Connect(notif)
 
 for i,v in ipairs(game:GetService("Players"):GetPlayers()) do
-if v:IsInGroup(5375519)  then
+if v:IsInGroup(32704720)  then
    game:GetService('StarterGui'):SetCore('SendNotification', {
        Title = 'admin :warning:',
        Text = "admin is here",
