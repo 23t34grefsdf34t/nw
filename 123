@@ -1203,6 +1203,20 @@ CreditsLeftGroupBox:AddLabel('Kiriot | ESP Library')
 CreditsLeftGroupBox:AddLabel('Confedyso | Financial Support')
 CreditsLeftGroupBox:AddLabel('zu0a loves minors')
 
+CreditsLeftGroupBox:AddToggle('No Blur', {
+    Text = 'No blur',
+    Default = false,
+    Tooltip = 'This is a tooltip',
+        
+        Callback = function(Value)
+        print('[cb] MyToggle changed to:', Value)
+if Value then game:GetService("Lighting").UnderwaterBlurEffect:Destroy()
+else
+print("1")
+        end
+    end
+})
+
 CreditsLeftGroupBox:AddButton('Unload', function() Library:Unload() end)
 
 local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
