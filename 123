@@ -571,24 +571,48 @@ CharacterLeftGroupBox:AddToggle('Join Notify', {
         print('[cb] FullBright changed to:', Value)
         if Value then
             wait(0.1)
-local function notif(plr) 
-   local message = ""
-   if plr:IsInGroup(32704720)  then
-       message = "admin has joined"
-   else
-       message = plr.Name .. " has joined"
-   end
-   game:GetService('StarterGui'):SetCore('SendNotification', {
-       Title = 'New player connected',
-       Text = message,
-       Duration = 3
-   })
+game:GetService("Players").PlayerAdded:Connect(function(plr)
+   if plr:IsInGroup(32704720) then
+game.StarterGui:SetCore("SendNotification", {
+Title = "Alert"; -- the title (ofc)
+Text = "admin"; -- what the text says (ofc)
+Icon = "rbxassetid://57254792"; -- the image if u want. 
+Duration = 5; -- how long the notification should in secounds
+})
+game.StarterGui:SetCore("SendNotification", {
+Title = "Alert"; -- the title (ofc)
+Text = "admin"; -- what the text says (ofc)
+Icon = "rbxassetid://57254792"; -- the image if u want. 
+Duration = 5; -- how long the notification should in secounds
+})
+game.StarterGui:SetCore("SendNotification", {
+Title = "Alert"; -- the title (ofc)
+Text = "admin"; -- what the text says (ofc)
+Icon = "rbxassetid://57254792"; -- the image if u want. 
+Duration = 5; -- how long the notification should in secounds
+})
+else
+game.StarterGui:SetCore("SendNotification", {
+Title = "Alert"; -- the title (ofc)
+Text = plr.Name ..' '.. "joined"; -- what the text says (ofc)
+Icon = "rbxassetid://57254792"; -- the image if u want. 
+Duration = 5; -- how long the notification should in secounds
+})
 end
-
-game:GetService("Players").PlayerAdded:Connect(notif)
+end)
 
 for i,v in ipairs(game:GetService("Players"):GetPlayers()) do
 if v:IsInGroup(32704720)  then
+   game:GetService('StarterGui'):SetCore('SendNotification', {
+       Title = 'admin :warning:',
+       Text = "admin is here",
+       Duration = 3
+   })
+   game:GetService('StarterGui'):SetCore('SendNotification', {
+       Title = 'admin :warning:',
+       Text = "admin is here",
+       Duration = 3
+   })
    game:GetService('StarterGui'):SetCore('SendNotification', {
        Title = 'admin :warning:',
        Text = "admin is here",
@@ -602,26 +626,29 @@ end
 end
 })
 
-CharacterLeftGroupBox:AddToggle('Swim boost', {
-    Text = 'Swim boost',
-    Default = false,
-    Tooltip = 'This is a tooltip',
-        
-        Callback = function(Value)
-        print('[cb] MyToggle changed to:', Value)
-        if Value then
+CharacterLeftGroupBox:AddSlider('SwimBoost', {
+    Text = 'Swim Boost',
+    Default = 0,
+    Min = 0,
+    Max = 1,
+    Rounding = 2,
+    Callback = function(Value)
         CharacterMethods.Speed.SpeedBoost = 22
-         CharacterMethods.Speed.Enabled = Value
-        CharacterMethods.Speed.SpeedConnection = RunService.Heartbeat:Connect(CharacterMethods.Speed.Heartbeat)
-else
-        CharacterMethods.Speed.Enabled = false
-        CharacterMethods.Speed.SpeedConnection:Disconnect()
-        CharacterMethods.Speed.SpeedConnection = nil
+
+        if Value > 0 then
+            if not CharacterMethods.Speed.Enabled then
+                CharacterMethods.Speed.Enabled = true
+                CharacterMethods.Speed.SpeedConnection = RunService.Heartbeat:Connect(CharacterMethods.Speed.Heartbeat)
+            end
+        else
+            if CharacterMethods.Speed.Enabled then
+                CharacterMethods.Speed.Enabled = false
+                CharacterMethods.Speed.SpeedConnection:Disconnect()
+                CharacterMethods.Speed.SpeedConnection = nil
+            end
         end
     end
 })
-
-CharacterMethods.Speed.Enabled = false
 
 CharacterLeftGroupBox:AddSlider('SpeedBoost', {
     Text = 'Speed Boost',
