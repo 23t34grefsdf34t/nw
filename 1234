@@ -1,0 +1,86 @@
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local LocalPlayer = game.Players.LocalPlayer
+local DefinEvents = nil
+
+local CharacterMethods = {}
+
+function CharacterMethods:GetCharacter(Player : Player)
+    if not Player then
+        return game.Players.LocalPlayer.Character
+    else
+        return Player.Character
+    end
+end
+
+function CharacterMethods:GetCharacters(IncludeLocalPlayer : boolean)
+    local Characters = {}
+    for _, Player in next, Players:GetPlayers() do
+        if IncludeLocalPlayer then
+            table.insert(Characters, Player.Character)
+        else
+            if Player ~= Players.LocalPlayer then
+                table.insert(Characters, Player.Character)
+            end
+        end
+    end
+    return Characters
+end
+
+CharacterMethods.Speed = {
+    SpeedConnection = nil,
+    SpeedBoost = 0,
+    Heartbeat = function(DeltaTime)
+        local Character = CharacterMethods:GetCharacter()
+        if Character and Character:FindFirstChild("Humanoid") then
+            Character:TranslateBy(Character.Humanoid.MoveDirection * CharacterMethods.Speed.SpeedBoost * DeltaTime)
+        end
+    end,
+    Enabled = false
+}
+
+local Key = "Y"
+local Toggle = false
+
+game:GetService("UserInputService").InputBegan:Connect(function(keyobject, stuffhappening)
+    if keyobject.KeyCode == Enum.KeyCode[Key] and not stuffhappening then 
+        Toggle = not Toggle
+    end
+end)
+
+game:GetService('RunService').Stepped:connect(function()
+    if Toggle then
+CharacterMethods.Speed.SpeedBoost = 22
+            if not CharacterMethods.Speed.Enabled then
+                CharacterMethods.Speed.Enabled = true
+                CharacterMethods.Speed.SpeedConnection = RunService.Heartbeat:Connect(CharacterMethods.Speed.Heartbeat)
+            end
+        else
+            if CharacterMethods.Speed.Enabled then
+                CharacterMethods.Speed.Enabled = false
+                CharacterMethods.Speed.SpeedConnection:Disconnect()
+                CharacterMethods.Speed.SpeedConnection = nil
+            end
+        end
+    end)
+
+local args = {
+    [1] = game:GetService("Players").LocalPlayer.PlayerGui.InterfaceGuis.Houses.Main.Items.ScrollingContent:FindFirstChild("1687252463"),
+    [2] = "LoadHouse"
+}
+
+game:GetService("ReplicatedStorage").DefinEvents.HouseGuiRequestBeginActionDelay:InvokeServer(unpack(args))
+wait(0.05)
+local args = {
+    [1] = game:GetService("ReplicatedStorage").Interacting,
+    [2] = "1687252463"
+}
+
+game:GetService("ReplicatedStorage").DefinEvents.InteractingRequestLoadHouse:InvokeServer(unpack(args))
+wait(0.05)
+local args = {
+    [1] = game:GetService("Players").LocalPlayer.PlayerGui.InterfaceGuis.Houses.Main.Items.ScrollingContent:FindFirstChild("1687252463"),
+    [2] = "LoadHouse"
+}
+
+game:GetService("ReplicatedStorage").DefinEvents.HouseGuiRequestEndActionDelay:InvokeServer(unpack(args))
