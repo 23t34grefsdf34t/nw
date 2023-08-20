@@ -50,13 +50,14 @@ end)
 
 game:GetService('RunService').Stepped:connect(function()
     if Toggle then
-CharacterMethods.Speed.SpeedBoost = 22
             if not CharacterMethods.Speed.Enabled then
+                CharacterMethods.Speed.SpeedBoost = 22
                 CharacterMethods.Speed.Enabled = true
                 CharacterMethods.Speed.SpeedConnection = RunService.Heartbeat:Connect(CharacterMethods.Speed.Heartbeat)
             end
         else
             if CharacterMethods.Speed.Enabled then
+                CharacterMethods.Speed.SpeedBoost = 0
                 CharacterMethods.Speed.Enabled = false
                 CharacterMethods.Speed.SpeedConnection:Disconnect()
                 CharacterMethods.Speed.SpeedConnection = nil
