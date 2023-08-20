@@ -626,30 +626,6 @@ end
 end
 })
 
-CharacterLeftGroupBox:AddSlider('SwimBoost', {
-    Text = 'Swim Boost',
-    Default = 0,
-    Min = 0,
-    Max = 1,
-    Rounding = 2,
-    Callback = function(Value)
-        CharacterMethods.Speed.SpeedBoost = 22
-
-        if Value > 0 then
-            if not CharacterMethods.Speed.Enabled then
-                CharacterMethods.Speed.Enabled = true
-                CharacterMethods.Speed.SpeedConnection = RunService.Heartbeat:Connect(CharacterMethods.Speed.Heartbeat)
-            end
-        else
-            if CharacterMethods.Speed.Enabled then
-                CharacterMethods.Speed.Enabled = false
-                CharacterMethods.Speed.SpeedConnection:Disconnect()
-                CharacterMethods.Speed.SpeedConnection = nil
-            end
-        end
-    end
-})
-
 CharacterLeftGroupBox:AddSlider('SpeedBoost', {
     Text = 'Speed Boost',
     Default = 0,
