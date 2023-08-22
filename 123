@@ -147,19 +147,13 @@ end
 
 local function sad(sad)
 
-local position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+local position = Vector3.new(4123, 60, 2694)
 
-local object = game:GetService("Workspace").Props.PlayerHouses["1568101132"].FurnitureProps:FindFirstChild("Wooden stool").Seat or game:GetService("Workspace").Props.PlayerProps:FindFirstChild("Wooden stool").Seat
+local object = game:GetService("Workspace").Props.PlayerProps:FindFirstChild("Wooden stool").Seat
 
 if object then
-    
-    local initialCFrame = object.CFrame
 
     object.CFrame = CFrame.new(position)
-
-    wait(10)
-
-    object.CFrame = CFrame.new(4123, 60, 2694)
 
 end
 end
