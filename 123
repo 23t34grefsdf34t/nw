@@ -144,7 +144,26 @@ else
         end
     end
 end
+
+local function sad(sad)
+
+local position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+
+local object = game:GetService("Workspace").Props.PlayerHouses["1568101132"].FurnitureProps:FindFirstChild("Wooden stool").Seat or game:GetService("Workspace").Props.PlayerProps:FindFirstChild("Wooden stool").Seat
+
+if object then
     
+    local initialCFrame = object.CFrame
+
+    object.CFrame = CFrame.new(position)
+
+    wait(10)
+
+    object.CFrame = CFrame.new(4123, 60, 2694)
+
+end
+end
+
 local function AutofillName(partialName)
     local players = game.Players:GetPlayers()
     local bestMatchPlayer = nil
@@ -683,41 +702,10 @@ for i, v in next, CurrentTeleportLocations do
 end
 
 GameTeleportsRightGroupBox:AddButton({
-    Text = 'Teleport to contract',
+    Text = 'Chair tp',
     Func = function()
 
-        local ContractItems = Players.LocalPlayer.PlayerGui.InterfaceGuis.TrackedContracts.Main.ScrollingContent:GetChildren()
-        
-        if #ContractItems > 1 then
-            local Crate = nil
-
-            local ContractItemName = ContractItems[2].Name
-
-            print(ContractItemName)
-
-            for i,v in next, game.ReplicatedStorage.Zones:GetDescendants() do
-                if v.Name == ContractItemName and v:IsA("Model") then
-                    print('found')
-                    Crate = v
-                    break
-                end
-            end
-
-            if Crate == nil then
-                for i,v in next, game.ReplicatedStorage.Zones:GetDescendants() do
-                    if v.Name == 'WorldPerimeterPingGui' then
-                        print('found 2')
-                        warn(v.Parent.Name)
-                        Crate = v.Parent.Parent
-                        break
-                    end
-                end
-            end
-
-            if Crate and Crate:GetPivot() then
-                CharacterMethods:TP(Crate:GetPivot())
-            end
-        end
+    sad()
     end,
     DoubleClick = false
 })
