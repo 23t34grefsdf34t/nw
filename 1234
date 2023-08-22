@@ -65,6 +65,7 @@ game:GetService('RunService').Stepped:connect(function()
         end
     end)
 
+if game.PlaceId == 5620237900 then
 local args = {
     [1] = game:GetService("Players").LocalPlayer.PlayerGui.InterfaceGuis.Houses.Main.Items.ScrollingContent:FindFirstChild("1687252463"),
     [2] = "LoadHouse"
@@ -85,3 +86,27 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").DefinEvents.HouseGuiRequestEndActionDelay:InvokeServer(unpack(args))
+end
+
+if game.PlaceId == 5465507265 then
+local args = {
+    [1] = game:GetService("Players").LocalPlayer.PlayerGui.InterfaceGuis.Houses.Main.Items.ScrollingContent:FindFirstChild("1690552197"),
+    [2] = "LoadHouse"
+}
+
+game:GetService("ReplicatedStorage").DefinEvents.HouseGuiRequestBeginActionDelay:InvokeServer(unpack(args))
+wait(0.05)
+local args = {
+    [1] = game:GetService("ReplicatedStorage").Interacting,
+    [2] = "1690552197"
+}
+
+game:GetService("ReplicatedStorage").DefinEvents.InteractingRequestLoadHouse:InvokeServer(unpack(args))
+wait(0.05)
+local args = {
+    [1] = game:GetService("Players").LocalPlayer.PlayerGui.InterfaceGuis.Houses.Main.Items.ScrollingContent:FindFirstChild("1690552197"),
+    [2] = "LoadHouse"
+}
+
+game:GetService("ReplicatedStorage").DefinEvents.HouseGuiRequestEndActionDelay:InvokeServer(unpack(args))
+end
